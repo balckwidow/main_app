@@ -82,11 +82,15 @@ function App() {
           </li>
           </ul>
           <div className="relative">
-          <Link to="/Cart" className={`mt-4 sm:mt-0 sm:block  ${open?"block":"hidden"}`}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-             <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-          </svg>
+            <Link to="/Cart" className={`mt-4 sm:mt-0 sm:block  ${open ? "block" : "hidden"}`}>
+              <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+
             </Link>
-            <span className="absolute -top-3 -right-4 h-5 w-5 text-center bg-slate-600 rounded-full shadow-md text-white text-sm ">{counter}</span>
+
           </div>
           
           <div className="absolute right-4 top-4 sm:hidden" onClick={() => setOpen(!open)}>
@@ -95,7 +99,7 @@ function App() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
               </svg>
             </div>
-            <span className="absolute -top-3 -right-4 h-5 w-5 text-center bg-slate-600 rounded-full shadow-md text-white text-sm ">{counter}</span>
+          
         </div>
      </div>
     </nav>

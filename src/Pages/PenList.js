@@ -7,7 +7,7 @@ const PenList = () => {
   const [data,setData]=useState([]);
   
   useEffect(()=>{
-    if (localStorage.getItem("allpenslist")===null) {
+  
       const getData=async()=>{
         try{
           const querySnapshot = await getDocs(collection(db, "Pen"));
@@ -19,13 +19,7 @@ const PenList = () => {
             console.log(err)
           }      
       }
-      getData();
-      let d=[data]
-      localStorage.setItem('allpenslist',JSON.stringify(d))
-    } else {
-      let d0 = JSON.parse(localStorage.getItem('allpenslist'));
-      setData(d0)
-    }
+    getData() 
 
   },[])
   console.log(data)
@@ -36,9 +30,8 @@ const PenList = () => {
            <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {data &&
               data.map((val,index)=> {
-               
                 return(
-                <Link to={"/Pen/"+val.name} key={val.name}>
+                <Link to={"/Pen/"+val.name} key={index}>
                 <div  className="group relative w-fit h-fit">
                    <div className='min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80'>
                       <img src={val.image} alt={val.name} className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
