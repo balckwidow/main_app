@@ -20,9 +20,11 @@ const PenList = () => {
           }      
       }
       getData();
-      localStorage.setItem('allpenslist',JSON.stringify(data))
+      let d=[data]
+      localStorage.setItem('allpenslist',JSON.stringify(d))
     } else {
-      setData(JSON.parse(localStorage.getItem('allpenslist')))
+      let d0 = JSON.parse(localStorage.getItem('allpenslist'));
+      setData(d0)
     }
 
   },[])
@@ -33,7 +35,7 @@ const PenList = () => {
            <h2 className="text-2xl font-bold tracking-tight text-gray-900">Pen</h2>
            <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {data &&
-              data.map((val)=> {
+              data.map((val,index)=> {
                
                 return(
                 <Link to={"/Pen/"+val.name} key={val.name}>

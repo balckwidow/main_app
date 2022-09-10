@@ -1,9 +1,9 @@
-import {useState,Fragment} from "react"
+import {useState,Fragment,useEffect} from "react"
 import { Link, Route, Routes } from 'react-router-dom';
 import Pen from "./Pages/Pen"
 import PenList from "./Pages/PenList"
 import { Menu, Transition } from '@headlessui/react'
-
+import Cart from "./Pages/Cart"
 
 
 
@@ -13,7 +13,22 @@ function classNames(...classes) {
 
 
 function App() {
-  const [open,setOpen]=useState(false)
+  const [open, setOpen] = useState(false)
+  const [counter, setCounter] = useState(0);
+  
+  let orders=JSON.parse(localStorage.getItem("Order")).length
+  useEffect(() => {
+    
+    const countOrders = () => {
+      
+      
+    if (localStorage.getItem("Order") != null) {
+      setCounter(orders ) 
+     }
+  }
+    countOrders();
+  },[orders])
+  
   return (
     <>
      <nav className={`relative flex bg-white p-3 w-full text-md  flex-col  sm:flex-row sm:items-center sm:justify-between shadow-md font-medium lg:p-6`}>
@@ -66,11 +81,12 @@ function App() {
               </Menu>
           </li>
           </ul>
-          <div>
-          <Link to="/Pen" className={`mt-4 sm:mt-0 sm:block  ${open?"block":"hidden"}`}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <div className="relative">
+          <Link to="/Cart" className={`mt-4 sm:mt-0 sm:block  ${open?"block":"hidden"}`}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
           </svg>
-        </Link>
+            </Link>
+            <span className="absolute -top-3 -right-4 h-5 w-5 text-center bg-slate-600 rounded-full shadow-md text-white text-sm ">{counter}</span>
           </div>
           
           <div className="absolute right-4 top-4 sm:hidden" onClick={() => setOpen(!open)}>
@@ -79,13 +95,14 @@ function App() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
               </svg>
             </div>
-            <span className="absolute -top-3 -right-4 h-5 w-5 text-center bg-slate-600 rounded-full shadow-md text-white text-sm ">2</span>
+            <span className="absolute -top-3 -right-4 h-5 w-5 text-center bg-slate-600 rounded-full shadow-md text-white text-sm ">{counter}</span>
         </div>
      </div>
     </nav>
       
 
-     <Routes>
+      <Routes>
+        <Route path="/Cart" element={<Cart/>} />
       <Route path='/Pen'>
          <Route index element={<PenList/>} />
          <Route path=":id" element={<Pen/>} />
