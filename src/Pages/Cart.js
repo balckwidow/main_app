@@ -2,24 +2,23 @@ import {useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const [data, setData] = useState(JSON.parse(localStorage.getItem("Order")));
+  const [data, setData] = useState(() =>  JSON.parse(localStorage.getItem("Order")) || [] );
   let total = 0;
  
   const navigate = useNavigate()
   useEffect(() => {
-    setData(JSON.parse(localStorage.getItem("Order")))
-  },[])
+    localStorage.setItem("Order", JSON.stringify(data))
+  },[data])
   const removeItem = (e) => {
     let id = e.target.id;
-    let list = data;
-    list.splice(id,1);
-    localStorage.setItem("Order", JSON.stringify(list))
+    let v = data[id].name+data[id].color;
+    setData((prev)=>prev.filter(val=>val.name+val.color!==v))
   }
  const handleCheckout=()=>{
-  navigate("/pen")
+  navigate("/checkout")
  }
   return (
-   
+   data&&
     <div className='mx-2 lg:mx-0 lg:w-full'>
        <div className='mt-1 bg-white lg:w-full'>
         <div className="py-4 px-4 sm:py-24 sm:px-6  lg:flex lg:flex-col  lg:items-center lg:px-8 lg:w-full  ">
