@@ -5,10 +5,13 @@ import {Link} from "react-router-dom"
 
 
 
+
 const PenList = () => {
   const [data,setData]=useState([]);
   
-  useEffect(()=>{
+  useEffect(() => {
+    if(localStorage.getItem("PenList")===null){
+      console.log("a")
       const getData=async()=>{
         try{
           const querySnapshot = await getDocs(collection(db, "Pen"));
@@ -17,18 +20,28 @@ const PenList = () => {
             list.push(doc.data())  
           });
           setData(list) 
+          console.log(list)
+          localStorage.setItem("PenList",JSON.stringify(list))
+
         }catch(err)
           {
             console.log(err)
           }      
       }
-    getData()  
+      getData()  
+    }
+    else {
+      setData(JSON.parse(localStorage.getItem("PenList")))
+    }
+
 
   }, [])
 
 
 
   return (
+    <>
+     { /*<Header counter={ JSON.parse(localStorage.getItem("Order")).length}/>*/}
     <div className='mt-1 bg-white w-full'>
         <div className="mx-4 ">
            <h2 className="text-2xl font-bold tracking-tight text-gray-900">Pen</h2>
@@ -72,7 +85,8 @@ const PenList = () => {
         </div>
        
         </div>
-    </div>
+      </div>
+      </>
   )
 }
 

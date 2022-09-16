@@ -15,3 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#items::-webkit-scrollbar {
+  width: 6px;  
+  background-color: rgb(150, 182, 249);
+  border-radius: 50px;             /* width of the entire scrollbar */
+}
+#items::-webkit-scrollbar-thumb {
+  background: rgb(50, 110, 238);
+  border-radius: 50px;        /* color of the tracking area */
+}
+

@@ -1,24 +1,30 @@
 import {useState,useEffect} from 'react'
 import { useNavigate } from "react-router-dom";
 
-const Cart = () => {
-  const [data, setData] = useState(() =>  JSON.parse(localStorage.getItem("Order")) || [] );
+const Cart = ({setCount}) => {
+  const [data, setData] = useState(() => JSON.parse(sessionStorage.getItem("Order")) || []);
   let total = 0;
- 
+
   const navigate = useNavigate()
-  useEffect(() => {
-    localStorage.setItem("Order", JSON.stringify(data))
-  },[data])
-  const removeItem = (e) => {
-    let id = e.target.id;
-    let v = data[id].name+data[id].color;
-    setData((prev)=>prev.filter(val=>val.name+val.color!==v))
-  }
+  
+
  const handleCheckout=()=>{
   navigate("/checkout")
- }
+  }
+  useEffect(() => {
+    sessionStorage.setItem("Order", JSON.stringify(data))
+  }, [data])
+  const removeItem = (e) => {
+    let id = e.target.id;
+    e.stopPropagation()
+    let v = data[id].name+data[id].color;
+    setData((prev) => prev.filter(val => val.name + val.color !== v))
+    setCount((prev)=>(prev-1))
+  }
   return (
-   data&&
+    
+    
+   
     <div className='mx-2 lg:mx-0 lg:w-full'>
        <div className='mt-1 bg-white lg:w-full'>
         <div className="py-4 px-4 sm:py-24 sm:px-6  lg:flex lg:flex-col  lg:items-center lg:px-8 lg:w-full  ">
@@ -46,12 +52,13 @@ const Cart = () => {
               
             </div>
             <div className='flex flex-col justify-between items-center'>
-                <p className='text-sm font-medium text-gray-600 md:text-md lg:text-lg'>LBP {val.price}</p>
-                <button className='text-blue-700 text-sm font-medium cursor-pointer md:text-md lg:text-lg' id={index} onClick={removeItem}>Remove</button>
+                <p className='text-sm font-medium text-gray-600 md:text-md lg:text-lg'>LBP {parseInt(val.price)*parseInt(val.amount)}</p>
+                <button className='text-blue-700 text-sm font-medium cursor-pointer md:text-md lg:text-lg' id={index} onClick={removeItem} >Remove</button>
               </div>
         </div>
                  )
-               } )}
+        })
+              }
           </div>
           <div className='mx-auto block w-full max-w-3xl'>
             <div className='mt-4 flex items-center justify-between font-bold text-md text-gray-700 md:text-md lg:text-lg '>
@@ -60,10 +67,11 @@ const Cart = () => {
             </div>
             <p className='mt-4 text-gray-500'>Shipping will be calculated at checkout.</p>
           </div>
-          <button className='mt-6 py-4 bg-blue-600 text-white font-medium w-full max-w-3xl rounded-md md:text-md lg:text-lg' onClick={handleCheckout}>Checkout</button>
+          <button className='mt-6 py-4 bg-blue-600 text-white font-medium w-full max-w-3xl rounded-md md:text-md lg:text-lg active:ring-3 transition ease-in-out delay-150 active:-translate-y-1 active:scale-110 active:accent-indigo-700 active:shadow-lg active:shadow-blue-500/50' onClick={handleCheckout}>Checkout</button>
         </div>
     </div>
-  </div>
+      </div>
+    
   )
 }
 
