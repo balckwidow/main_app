@@ -19,11 +19,11 @@ function App() {
     const navigation = {
       pages: [
         { name: 'Home', href: '/' },
-        { name: 'Pen', href: '/Pen' },
-        { name: 'Books', href: '/Book' },
-        { name: 'Architecture', href: '/Architecture'},
-        { name: 'Decorations', href: '/Decorations'},
-        { name: 'Toys', href: '/Toys'},
+        { name: 'Pen', href: '/pen' },
+        { name: 'Books', href: '/book' },
+        { name: 'Architecture', href: '/architecture'},
+        { name: 'Decorations', href: '/decorations'},
+        { name: 'Toys', href: '/toys'},
       ],
     }
 
@@ -116,7 +116,7 @@ function App() {
             </button>
             {/* Logo */}
             <div className="mr-28 lg:ml-0">
-             <Link to="/Home">
+             <Link to="/">
                 Nejme
               </Link>
             </div>
@@ -146,7 +146,7 @@ function App() {
             <div className="ml-auto flex items-center"> 
               {/* Cart */}
               <div className="ml-4 flow-root lg:ml-6">
-                <Link to="/Cart" className="group -m-2 flex items-center p-2">
+                <Link to="/cart" className="group -m-2 flex items-center p-2">
                  
                   <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true">
@@ -166,9 +166,9 @@ function App() {
       </div>
       
       <Routes>
-      <Route path="/Cart" element={<Cart setCount={setCount}/>} />
+      <Route path="/cart" element={<Cart setCount={setCount}/>} />
         <Route path="/checkout" element={<CheckOut/>}/>
-         <Route path='/Pen' >
+         <Route path='/pen' >
            <Route index element={<PenList/>} />
           <Route path=":id" element={<Pen  setCount={setCount}/>} />
          </Route>
